@@ -1,6 +1,6 @@
-from libreria.graficiCovidSettimanali import *
+#from libreria.graficiCovidSettimanali import *
 from libreria.graficiCovid import *
-from libreria.mappaCovidUltimoGiorno import *
+#from libreria.mappaCovidUltimoGiorno import *
 from flask import Flask, jsonify, render_template
 
 

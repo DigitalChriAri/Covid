@@ -358,9 +358,7 @@ def graficiGiornalieri():
 
 	commitMessage=date.today().strftime("%d-%m-%Y")
 
-	g=Github("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")
-
-
+	g=Github("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")
 
 	#creo connessione
 	repo=g.get_user().get_repo("Covid")
