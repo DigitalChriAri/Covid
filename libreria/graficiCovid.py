@@ -353,12 +353,12 @@ def graficiGiornalieri():
 	from github import Github, InputGitTreeElement
 	from datetime import date
 
-	fileList=[df2,df2]
+	fileList=[df1,df2]
 	fileNames=["Covid19GraficiItaliaEVeneto.csv","Covid19GraficiTamponiTotaliItaliaEVeneto.csv"]
 
 	commitMessage=date.today().strftime("%d-%m-%Y")
 
-	g=Github("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")
+	g=Github("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")
 
 	#Prendo cartella
 	'''
