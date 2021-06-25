@@ -317,8 +317,6 @@ def graficiGiornalieri():
 	covid19PerGraficiGiornalieriItaliaVeneto["Positivi su totale tamponi molecolari in Italia"]=rapportoPositiviSuTamponiMolecolariGiornalieri
 	covid19PerGraficiGiornalieriItaliaVeneto["Positivi su totale tamponi molecolari in Veneto"]=rapportoPositiviSuTamponiMolecolariGiornalieriInVeneto
 
-
-
 	covid19PerGraficiGiornalieriItaliaVeneto["ingressiTerapiaIntensivaInItalia"]=ingressiIntensivaGiornalieri
 	covid19PerGraficiGiornalieriItaliaVeneto["ingressiTerapiaIntensivaInVeneto"]=ingressiIntensivaGiornalieriInVeneto
 	covid19PerGraficiGiornalieriItaliaVeneto["ingressi non terapia intensiva in Italia"]=ingressiNonIntensivaGiornalieri
@@ -336,15 +334,17 @@ def graficiGiornalieri():
 	covid19PerGraficiTamponiTotali["Positivi su totale tamponi in Italia"]=rapportoPositiviSuTotaleTamponiGiornalieri[quanteDateCiSonoState-len(dateRilevanti):]
 	covid19PerGraficiTamponiTotali["Positivi su totale tamponi in Veneto"]=rapportoPositiviSuTotaleTamponiGiornalieriInVeneto[quanteDateCiSonoState-len(dateRilevanti):]
 
-
+	'''
 	if os.path.exists("csv/Covid19GraficiItaliaEVeneto.csv"):
 	    os.remove("csv/Covid19GraficiItaliaEVeneto.csv")
+	'''
 	
 	df1=covid19PerGraficiGiornalieriItaliaVeneto.to_csv(sep=",",index=False)
 
-
+	'''
 	if os.path.exists("csv/Covid19GraficiTamponiTotaliItaliaEVeneto.csv"):
 	    os.remove("csv/Covid19GraficiTamponiTotaliItaliaEVeneto.csv")
+	'''
 
 	df2=covid19PerGraficiTamponiTotali.to_csv(sep=",",index=False)
 
@@ -360,28 +360,16 @@ def graficiGiornalieri():
 
 	g=Github("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")
 
-	#Prendo cartella
-	'''
-	for repo in g.get_user().get_repos():
-		print(repo.name)
-		#repo.edit(has_wiki=False)
-	'''
+
 
 	#creo connessione
 	repo=g.get_user().get_repo("Covid")
-	#print("Sono la cartella", repo)
 
 	'''
-	x=repo.get_contents("")
-	for labels in x:
-		print("label",labels)
-	'''
-	#file1=repo.get_contents("csv/Covid19GraficiItaliaEVeneto.csv")
-	#file2=repo.get_contents("csv/Covid19GraficiTamponiTotaliItaliaEVeneto.csv")
-
 	file1= repo.get_git_refs()
 	for y in file1:
 		print("y",y)
+	'''
 
 	mainRef= repo.get_git_ref("heads/main")
 
