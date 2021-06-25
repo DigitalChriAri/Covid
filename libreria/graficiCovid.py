@@ -30,7 +30,7 @@ def graficiGiornalieri():
 	for i in range(quanteDateCiSonoState):
 		listaDate.append(date[-21*i-1])
 	listaDate.reverse()
-	##print(listaDate)
+	#print(listaDate)
 
 
 	#Prendiamo il dataframe al primo giorno di pandemia
@@ -66,7 +66,7 @@ def graficiGiornalieri():
 			inizioDate=i
 			break
 
-	print(inizioDate)
+	#print(inizioDate)
 
 	for i in range(inizioDate, quanteDateCiSonoState):
 		dateRilevanti.append(listaDate[i])
@@ -337,16 +337,73 @@ def graficiGiornalieri():
 	covid19PerGraficiTamponiTotali["Positivi su totale tamponi in Veneto"]=rapportoPositiviSuTotaleTamponiGiornalieriInVeneto[quanteDateCiSonoState-len(dateRilevanti):]
 
 
-
-	#print(covid19PerGraficiGiornalieriItaliaVeneto.info())
-
 	if os.path.exists("csv/Covid19GraficiItaliaEVeneto.csv"):
 	    os.remove("csv/Covid19GraficiItaliaEVeneto.csv")
 	
-	covid19PerGraficiGiornalieriItaliaVeneto.to_csv("csv/Covid19GraficiItaliaEVeneto.csv",index=False)
+	df1=covid19PerGraficiGiornalieriItaliaVeneto.to_csv(sep=",",index=False)
+
 
 	if os.path.exists("csv/Covid19GraficiTamponiTotaliItaliaEVeneto.csv"):
 	    os.remove("csv/Covid19GraficiTamponiTotaliItaliaEVeneto.csv")
 
-	covid19PerGraficiTamponiTotali.to_csv("csv/Covid19GraficiTamponiTotaliItaliaEVeneto.csv",index=False)
+	df2=covid19PerGraficiTamponiTotali.to_csv(sep=",",index=False)
+
+
+	#Codice per commitare su Gthub
+	from github import Github, InputGitTreeElement
+	from datetime import date
+
+	fileList=[df2,df2]
+	fileNames=["Covid19GraficiItaliaEVeneto.csv","Covid19GraficiTamponiTotaliItaliaEVeneto.csv"]
+
+	commitMessage=date.today().strftime("%d-%m-%Y")
+
+	g=Github("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")
+
+	#Prendo cartella
+	'''
+	for repo in g.get_user().get_repos():
+		print(repo.name)
+		#repo.edit(has_wiki=False)
+	'''
+
+	#creo connessione
+	repo=g.get_user().get_repo("Covid")
+	#print("Sono la cartella", repo)
+
+	'''
+	x=repo.get_contents("")
+	for labels in x:
+		print("label",labels)
+	'''
+	#file1=repo.get_contents("csv/Covid19GraficiItaliaEVeneto.csv")
+	#file2=repo.get_contents("csv/Covid19GraficiTamponiTotaliItaliaEVeneto.csv")
+
+	file1= repo.get_git_refs()
+	for y in file1:
+		print("y",y)
+
+	mainRef= repo.get_git_ref("heads/main")
+
+
+	#carichiamo il file
+
+	mainSha=mainRef.object.sha
+	baseTree= repo.get_git_tree(mainSha)
+
+	elementList=[]
+	for i in range(len(fileList)):
+		element=InputGitTreeElement(fileNames[i],'100644','blob',fileList[i])#100644 è per file normale, 'blob' binary large object per caricare su gihub file
+		elementList.append(element)
+
+	tree=repo.create_git_tree(elementList, baseTree)
+	parent=repo.get_git_commit(mainSha)
+
+	commit=repo.create_git_commit(commitMessage,tree,[parent])
+	mainRef.edit(commit.sha)
+	print("Aggiornamento completato")
+
+
+
+
 

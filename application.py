@@ -12,14 +12,14 @@ def index():
 
 @application.route("/update")
 def update():
-    mappa()
+    #mappa()
     graficiGiornalieri()
-    graficiSettimanali()
+    #graficiSettimanali()
     return render_template("updateFlourish.html")
 
-mappa()
+#mappa()
 graficiGiornalieri()
-graficiSettimanali()
+#graficiSettimanali()
 
 if __name__ == '__main__':
     application.run(debug=True, port=80)
