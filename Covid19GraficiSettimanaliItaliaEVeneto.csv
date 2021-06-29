@@ -1,4 +1,4 @@
-Data,Tasso di positivita ai tamponi molecolari Italia,Tasso di positivita ai tamponi molecolari Veneto,Ingressi in terapia intensiva Media Regionale,Ingressi in terapia intensiva Veneto,Ingressi nei reparti ordinari Media Regionale,Ingressi nei reparti ordinari Veneto,Deceduti Italia,Deceduti Veneto se popoloso quanto Italia
+Data,tassoDiPositivitaAiTamponiMolecolariItalia,tassoDiPositivitaAiTamponiMolecolariVeneto,ingressiInTerapiaIntensivaMediaRegionale,ingressiInTerapiaIntensivaVeneto,ingressiNeiRepartiOrdinariMediaRegionale,ingressiNeiRepartiOrdinariVeneto,decedutiItalia,decedutiVenetoSePopolosoQuantoItalia
 08-03-2020,19.718847622353348,5.931215389099388,24.285714285714285,34,138.95238095238096,95,332,197.26898999026102
 15-03-2020,23.174408366905897,9.032956458984845,48.666666666666664,82,290.76190476190476,280,1443,554.8190343476091
 22-03-2020,25.76046980217673,11.74129353233831,63.666666666666664,126,484.9047619047619,687,3667,1306.9070586854793
